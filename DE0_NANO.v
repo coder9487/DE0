@@ -127,7 +127,7 @@ reg [11:0] adc_mem_nex;
 
 assign ADC_SCLK = spi_clk_en | spi_clk;
 assign ADC_CS_N = adc_cs_n;
-assign ADC_SDAT = spi_mosi;
+assign ADC_SADDR = spi_mosi;
 
 
 
@@ -157,18 +157,18 @@ always @(*) begin
 			adc_mem_nex[i] = adc_mem[i];
 		end
 		case(spi_clk_cnt)
-			8:	adc_mem_nex[11] = ADC_SADDR;
-			10:	adc_mem_nex[10] = ADC_SADDR;
-			12:	adc_mem_nex[9] = ADC_SADDR;
-			14:	adc_mem_nex[8] = ADC_SADDR;
-			16:	adc_mem_nex[7] = ADC_SADDR;
-			18:	adc_mem_nex[6] = ADC_SADDR;
-			20:	adc_mem_nex[5] = ADC_SADDR;
-			22:	adc_mem_nex[4] = ADC_SADDR;
-			24:	adc_mem_nex[3] = ADC_SADDR;
-			26:	adc_mem_nex[2] = ADC_SADDR;
-			28:	adc_mem_nex[1] = ADC_SADDR;
-			30:	adc_mem_nex[0] = ADC_SADDR;
+			8:	adc_mem_nex[11] = ADC_SDAT;
+			10:	adc_mem_nex[10] = ADC_SDAT;
+			12:	adc_mem_nex[9] = ADC_SDAT;
+			14:	adc_mem_nex[8] = ADC_SDAT;
+			16:	adc_mem_nex[7] = ADC_SDAT;
+			18:	adc_mem_nex[6] = ADC_SDAT;
+			20:	adc_mem_nex[5] = ADC_SDAT;
+			22:	adc_mem_nex[4] = ADC_SDAT;
+			24:	adc_mem_nex[3] = ADC_SDAT;
+			26:	adc_mem_nex[2] = ADC_SDAT;
+			28:	adc_mem_nex[1] = ADC_SDAT;
+			30:	adc_mem_nex[0] = ADC_SDAT;
 		endcase
 	end
 	else begin
