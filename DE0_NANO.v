@@ -176,7 +176,7 @@ always @(*) begin
 	end
 end
 
-always @(posedge CLOCK_50 or posedge KEY[0]) begin
+always @(posedge CLOCK_50 or negedge KEY[0]) begin
 	if(KEY[0] == 0)	begin
 		clk_cnt 		<= 0;
 		state_cur 		<= 0;
