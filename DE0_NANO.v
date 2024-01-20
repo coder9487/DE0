@@ -256,7 +256,7 @@ always @(*) begin
 				state_nex = STATE_SEND_REG;
 		end
 		STATE_READ_DATA:begin
-			if(spi_clk_cnt == 33)
+			if(spi_clk_cnt == 30)
 				state_nex = STATE_WAIT;
 			else
 				state_nex = STATE_READ_DATA;
