@@ -16,8 +16,8 @@ wire spi_mosi;
 
 ADC128S022 adc1(
     .CLK(spi_clk_w),
-    .MOSI(spi_mosi),
-    .MISO(spi_miso),
+    .MOSI(spi_miso),
+    .MISO(spi_mosi),
     .CS_N(spi_cs_n_w),
     .i_rst_n(rst_n)
 );
@@ -62,15 +62,15 @@ module ADC128S022 (
     output reg MISO,
     input CS_N,
     input i_rst_n
-);
+    );
 
-reg [11:0] adc_mem;
-reg [4:0] cnt;
-reg [4:0] cnt_nex;
+    reg [11:0] adc_mem;
+    reg [4:0] cnt;
+    reg [4:0] cnt_nex;
 
-initial begin
-    adc_mem <= 12'b1000_0100_1111;
-end
+    initial begin
+        adc_mem <= 12'b1000_0100_1111;
+    end
 
     always @(negedge CLK or negedge i_rst_n) begin
         if(i_rst_n == 0)begin
@@ -80,6 +80,7 @@ end
             cnt <= cnt_nex;
         end
     end
+
 
     always @(*) begin
         if(!CS_N)begin
@@ -94,11 +95,11 @@ end
     
     always @(*) begin
         case (cnt)
-            5:MISO = adc_mem[11];
-            6:MISO = adc_mem[10];
-            7:MISO = adc_mem[9];
-            8:MISO = adc_mem[8];
-            9:MISO = adc_mem[7];
+            5: MISO = adc_mem[11];
+            6: MISO = adc_mem[10];
+            7: MISO = adc_mem[9];
+            8: MISO = adc_mem[8];
+            9: MISO = adc_mem[7];
             10:MISO = adc_mem[6];
             11:MISO = adc_mem[5];
             12:MISO = adc_mem[4];
@@ -106,11 +107,11 @@ end
             14:MISO = adc_mem[2];
             15:MISO = adc_mem[1];
             16:MISO = adc_mem[0]; 
-                
-            default: 
-                MISO = 0;
+            default:MISO = 0;
         endcase
     end
+
+
 endmodule
 
 

@@ -124,11 +124,16 @@ reg [11:0] adc_mem_nex;
 //  Structural coding
 //=======================================================
 
+assign LED			= adc_mem[11:4];
+assign ADC_SCLK  	= spi_clk_en | spi_clk;
+assign ADC_CS_N  	= adc_cs_n;
+assign ADC_SADDR 	= spi_mosi;
 
-assign ADC_SCLK = spi_clk_en | spi_clk;
-assign ADC_CS_N = adc_cs_n;
-assign ADC_SADDR = spi_mosi;
 
+assign UP[0]		= ADC_SCLK;
+assign UP[1]		= ADC_SADDR;
+assign UP[3]		= ADC_SDAT;
+assign UP[5]		= ADC_CS_N;
 
 
 always @(*) begin
@@ -203,13 +208,13 @@ always @(*) begin
 	else
 		clk_cnt_nex = clk_cnt + 1;
 end
+
 always @(*) begin
 	case(state_cur)
 	STATE_IDLE,STATE_STOP:
 		adc_cs_n = 1;
-	default: begin
+	default:
 		adc_cs_n = 0;
-		end
 	endcase
 end
 
@@ -225,6 +230,7 @@ always @(*) begin
 		spi_clk_cnt_nex = spi_clk_cnt;
 	end
 end
+
 always @(*) begin
 	if(clk_cnt == CLK_MAX/2)
 		case (state_cur)
