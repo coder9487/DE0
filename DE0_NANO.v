@@ -271,7 +271,7 @@ always @(*) begin
 			state_nex = STATE_STOP;
 		end
 		STATE_STOP:begin
-			state_nex = STATE_STOP;
+			state_nex = STATE_IDLE;
 		end
 		default:
 			state_nex = STATE_STOP;
